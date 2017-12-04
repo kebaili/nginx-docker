@@ -9,7 +9,7 @@ services:
       - core
 
   nginx:
-    build: nginx-build
+    build: nginx-docker
     hostname: nginx
     depends_on:
       - gatewaybridge
