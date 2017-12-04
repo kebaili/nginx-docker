@@ -1,0 +1,7 @@
+  }
+  server {
+    listen PORT udp;
+    access_log /var/log/nginx/access.log basic;
+    proxy_pass named_backends;
+  }
+}
