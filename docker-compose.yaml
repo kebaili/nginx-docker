@@ -1,0 +1,26 @@
+version: "2"
+
+services:
+  gatewaybridge:
+    image: loraserver/lora-gateway-bridge
+    ports:
+      - 1700/udp
+    networks:
+      - core
+
+  nginx:
+    build: nginx-build
+    hostname: nginx
+    depends_on:
+      - gatewaybridge
+    ports:
+      - 1700:1700/udp
+    environment:
+      - PORT=1700
+      - ALL_SERVERS=gatewaybridge
+      - BALANCE=hash $remote_addr consistent;
+    networks:
+      - core
+
+networks:
+  core:
